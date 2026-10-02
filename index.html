@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#6c271d" />
+<title>Pravarthika & Aagash | 24 January 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Marcellus&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#9c6417;
+  --deep:#6e251d;
+  --cream:#fff5df;
+  --display:"Cormorant Garamond",Georgia,serif;
+  --caps:"Marcellus",Georgia,serif;
+  --script:"Great Vibes",cursive;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:#1f120d}
+body{margin:0;background:#1f120d;color:#4e2c20;font-family:var(--display);overflow-x:hidden}
+body.locked{overflow:hidden}
+a{color:inherit}
+
+.scene{
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  background:#1f120d;
+}
+.scene::before{
+  content:"";
+  position:absolute;inset:-40px;z-index:-2;
+  background-image:var(--bg);
+  background-position:center;background-size:cover;
+  filter:blur(30px) brightness(.55) saturate(.9);
+  transform:scale(1.12);
+}
+.scene::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,rgba(25,9,5,.34),transparent 25%,transparent 75%,rgba(25,9,5,.34));
+}
+.card{
+  width:min(100vw,calc(100svh * 0.5628));
+  aspect-ratio:941/1672;
+  position:relative;
+  background-image:var(--bg);
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  background-position:center;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(16px) scale(.994);
+  transition:opacity .9s ease,transform 1.1s ease;
+}
+.card.in-view{opacity:1;transform:none}
+.overlay{position:absolute;inset:0;text-align:center;line-height:1.15}
+
+/* Opening */
+.opening-copy{position:absolute;left:10%;right:10%;top:57%;color:#7d481b;text-shadow:0 1px 10px rgba(255,244,217,.7)}
+.opening-copy .invite{font-family:var(--caps);font-size:clamp(.62rem,2.6vw,.9rem);letter-spacing:.2em;text-transform:uppercase}
+.opening-copy h1{font-family:var(--script);font-size:clamp(2.2rem,9vw,4rem);font-weight:400;margin:.35em 0 .12em;color:#8d551f}
+.opening-copy .date{font-family:var(--caps);font-size:clamp(.7rem,3vw,1rem);letter-spacing:.16em;text-transform:uppercase}
+
+/* Nichayadhartham */
+.nich-copy{position:absolute;left:11%;right:11%;top:26%;color:#fff3da;text-shadow:0 3px 16px rgba(61,18,8,.85)}
+.nich-copy .eyebrow{font-family:var(--caps);font-size:clamp(.62rem,2.6vw,.9rem);letter-spacing:.2em;text-transform:uppercase;color:#ffe0a3}
+.nich-copy h2{font-size:clamp(2.15rem,9vw,4.2rem);font-weight:500;margin:.2em 0 .12em}
+.nich-copy .names{font-family:var(--script);font-size:clamp(2rem,8vw,3.7rem);color:#ffe5a6;margin:.1em 0}
+.nich-copy p{font-size:clamp(.92rem,3.8vw,1.35rem);line-height:1.4;margin:.55em auto 0;max-width:24em}
+
+/* Pathirigai */
+.path-copy{position:absolute;left:13%;right:13%;top:21%;bottom:12%;display:flex;flex-direction:column;align-items:center;color:#74391e;text-shadow:0 1px 8px rgba(255,246,226,.85)}
+.path-copy .tamilish{font-family:var(--caps);font-size:clamp(.55rem,2.25vw,.8rem);letter-spacing:.16em;text-transform:uppercase;color:#a06a27}
+.path-copy h2{font-size:clamp(1.9rem,7.6vw,3.5rem);font-weight:500;margin:.42em 0 .2em;color:#833c26}
+.path-copy .names{font-family:var(--script);font-size:clamp(2.2rem,8.7vw,4rem);color:#9a5821;margin:.05em 0 .25em}
+.path-copy p{font-size:clamp(.84rem,3.3vw,1.17rem);line-height:1.5;margin:.35em 0;max-width:28em}
+.path-copy .mini-line{width:45%;height:1px;background:linear-gradient(90deg,transparent,#b7853d,transparent);margin:.75em 0}
+
+/* Registration */
+.reg-copy{position:absolute;left:9%;right:9%;top:18%;color:#fff8e8;text-shadow:0 3px 18px rgba(72,35,14,.72)}
+.reg-copy .eyebrow{font-family:var(--caps);font-size:clamp(.58rem,2.4vw,.84rem);letter-spacing:.18em;text-transform:uppercase;color:#ffe6b3}
+.reg-copy h2{font-size:clamp(2rem,8.5vw,3.9rem);font-weight:500;margin:.2em 0 .08em}
+.reg-copy .names{font-family:var(--script);font-size:clamp(2.2rem,9vw,4.2rem);color:#fff0c8;margin:.08em 0}
+.reg-copy p{font-size:clamp(.86rem,3.5vw,1.25rem);line-height:1.45;margin:.4em 0}
+
+/* RSVP */
+.rsvp-copy{position:absolute;left:14%;right:14%;top:20%;color:#70421d}
+.rsvp-copy h2{font-size:clamp(2rem,8vw,3.7rem);font-weight:500;margin:0;color:#80501f}
+.rsvp-copy p{font-size:clamp(.82rem,3.3vw,1.12rem);line-height:1.4;margin:.35em 0 1em}
+.rsvp-form{margin:0 auto;width:88%;display:grid;gap:clamp(10px,2.7vw,18px)}
+.rsvp-form label{font-family:var(--caps);font-size:clamp(.58rem,2.3vw,.78rem);letter-spacing:.12em;text-transform:uppercase;text-align:left}
+.rsvp-form input,.rsvp-form select{
+  width:100%;border:0;border-bottom:1px solid rgba(125,79,29,.55);border-radius:0;
+  background:rgba(255,249,236,.35);padding:8px 4px;color:#5b351b;outline:none;
+  font-size:clamp(.82rem,3.2vw,1.05rem);font-family:var(--display)
+}
+.rsvp-form button{justify-self:center;border:0;border-bottom:1px solid #855328;background:transparent;color:#74431c;padding:8px 2px 5px;font-family:var(--caps);font-size:clamp(.6rem,2.45vw,.82rem);letter-spacing:.13em;text-transform:uppercase;cursor:pointer}
+#rsvpMessage{min-height:1.3em;font-size:clamp(.72rem,2.9vw,.94rem);line-height:1.35;color:#7b3f22}
+
+/* Closing */
+.close-copy{position:absolute;left:12%;right:12%;top:25%;color:#fff2dc;text-shadow:0 3px 18px rgba(65,28,10,.65)}
+.close-copy .thank{font-family:var(--script);font-size:clamp(3rem,12vw,5.5rem);color:#fff0cf;margin:0}
+.close-copy h2{font-size:clamp(1.65rem,6.7vw,3rem);font-weight:500;margin:.25em 0}
+.close-copy p{font-size:clamp(.84rem,3.35vw,1.18rem);line-height:1.5;margin:.6em 0}
+.close-copy .family{font-family:var(--caps);font-size:clamp(.6rem,2.45vw,.83rem);letter-spacing:.12em;text-transform:uppercase;line-height:1.8;margin-top:1.2em}
+.close-copy a{text-decoration:none;border-bottom:1px solid rgba(255,239,205,.45)}
+
+#cover{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#1f120d;transition:opacity 1s ease,visibility 1s ease}
+#cover.opened{opacity:0;visibility:hidden;pointer-events:none}
+#cover .card{opacity:1;transform:none}
+.cover-button{position:absolute;inset:0;border:0;background:transparent;cursor:pointer;z-index:3}
+.tap{position:absolute;left:50%;bottom:3%;transform:translateX(-50%);z-index:2;color:#8b561f;font-family:var(--caps);font-size:clamp(.58rem,2.4vw,.8rem);letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 6px rgba(255,244,217,.8);animation:bob 2s ease-in-out infinite;white-space:nowrap}
+.tap::after{content:"⌄";display:block;font-size:1.25rem;line-height:1.1}
+@keyframes bob{50%{transform:translate(-50%,6px);opacity:.55}}
+
+.petals{position:fixed;inset:0;z-index:20;pointer-events:none;overflow:hidden;opacity:0;transition:opacity .8s ease}
+body.opened .petals{opacity:.42}
+.petal{position:absolute;top:-7vh;width:7px;height:12px;background:#c65c66;border-radius:80% 20% 70% 30%;opacity:.38;animation:fall var(--d) linear infinite;animation-delay:var(--delay)}
+@keyframes fall{to{transform:translate3d(var(--x),112vh,0) rotate(540deg)}}
+
+@media(max-width:600px){
+  .card{width:100vw}
+  .scene{min-height:auto;background:#1f120d}
+  .scene::before,.scene::after{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.card{opacity:1;transform:none}}
+</style>
+</head>
+<body class="locked">
+<div id="cover">
+  <div class="card" style="--bg:url('01-opening.png')">
+    <div class="overlay">
+      <div class="opening-copy">
+        <div class="invite">Together with their families</div>
+        <h1>Pravarthika &amp; Aagash</h1>
+        <div class="date">Sunday · 24 January 2027</div>
+      </div>
+      <div class="tap">Tap anywhere to open</div>
+    </div>
+  </div>
+  <button id="openInvite" class="cover-button" aria-label="Open invitation"></button>
+</div>
+
+<div class="petals" aria-hidden="true">
+  <i class="petal" style="left:8%;--d:14s;--delay:-4s;--x:70px"></i>
+  <i class="petal" style="left:28%;--d:17s;--delay:-12s;--x:-65px"></i>
+  <i class="petal" style="left:51%;--d:15s;--delay:-7s;--x:45px"></i>
+  <i class="petal" style="left:73%;--d:18s;--delay:-15s;--x:-80px"></i>
+  <i class="petal" style="left:92%;--d:16s;--delay:-9s;--x:62px"></i>
+</div>
+
+<main>
+  <section id="opening" class="scene" style="--bg:url('01-opening.png')">
+    <div class="card" style="--bg:url('01-opening.png')">
+      <div class="overlay">
+        <div class="opening-copy">
+          <div class="invite">Together with their families</div>
+          <h1>Pravarthika &amp; Aagash</h1>
+          <div class="date">Sunday · 24 January 2027</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nichayadhartham" class="scene" style="--bg:url('02-nichayadhartham.png')">
+    <div class="card" style="--bg:url('02-nichayadhartham.png')">
+      <div class="overlay">
+        <div class="nich-copy">
+          <div class="eyebrow">With the blessings of our families</div>
+          <h2>Nichayadhartham</h2>
+          <div class="names">Pravarthika &amp; Aagash</div>
+          <p>Sunday, 24 January 2027<br><strong>9:00 AM onwards</strong><br>Dwaraka Indian Vegetarian Restaurant<br>Bambalapitiya, Colombo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pathirigai" class="scene" style="--bg:url('03-pathirigai.png')">
+    <div class="card" style="--bg:url('03-pathirigai.png')">
+      <div class="overlay">
+        <div class="path-copy">
+          <div class="tamilish">With Divine Blessings</div>
+          <h2>We joyfully invite you to celebrate</h2>
+          <div class="names">Pravarthika &amp; Aagash</div>
+          <div class="mini-line"></div>
+          <p>as they begin a beautiful new chapter together with their <strong>Nichayadhartham</strong>, followed by their <strong>Marriage Registration Ceremony</strong>.</p>
+          <p><strong>Sunday, 24 January 2027</strong><br>from 9:00 AM onwards</p>
+          <div class="mini-line"></div>
+          <p>Dwaraka Indian Vegetarian Restaurant<br>Bambalapitiya, Colombo, Sri Lanka</p>
+          <p>Your presence and blessings will make this celebration even more special.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="registration" class="scene" style="--bg:url('04-registration.png')">
+    <div class="card" style="--bg:url('04-registration.png')">
+      <div class="overlay">
+        <div class="reg-copy">
+          <div class="eyebrow">Following the Nichayadhartham</div>
+          <h2>Marriage Registration</h2>
+          <div class="names">Pravarthika &amp; Aagash</div>
+          <p>Two hearts, one promise,<br>and a lifetime ahead.</p>
+          <p><strong>24 January 2027</strong><br>Dwaraka · Bambalapitiya</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp" class="scene" style="--bg:url('05-rsvp.png')">
+    <div class="card" style="--bg:url('05-rsvp.png')">
+      <div class="overlay">
+        <div class="rsvp-copy">
+          <h2>RSVP</h2>
+          <p>Kindly confirm your attendance.<br>We look forward to celebrating with you.</p>
+          <form class="rsvp-form" id="rsvpForm" novalidate>
+            <label>Family Name
+              <input id="familyName" name="familyName" type="text" maxlength="80" autocomplete="family-name" required>
+            </label>
+            <label>Total Guests
+              <select id="totalGuests" name="totalGuests" required>
+                <option value="">Select</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+              </select>
+            </label>
+            <button type="submit" id="submitRSVP">Confirm Attendance →</button>
+            <div id="rsvpMessage" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="closing" class="scene" style="--bg:url('06-closing.png')">
+    <div class="card" style="--bg:url('06-closing.png')">
+      <div class="overlay">
+        <div class="close-copy">
+          <div class="thank">Thank You</div>
+          <h2>Come celebrate, share in our joy<br>and bless Pravarthika &amp; Aagash</h2>
+          <p>We would be delighted to have you with us on this special day.</p>
+          <div class="family">
+            With love from our families<br><br>
+            Narenthiran · <a href="tel:+94777697129">+94 77 769 7129</a><br>
+            Jeeva · <a href="tel:+61411380974">+61 411 380 974</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const RSVP_ENDPOINT = '';
+const cover = document.getElementById('cover');
+const body = document.body;
+document.getElementById('openInvite').addEventListener('click',()=>{
+  body.classList.remove('locked'); body.classList.add('opened'); cover.classList.add('opened');
+  setTimeout(()=>cover.remove(),1100);
+});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in-view')}),{threshold:.12});
+document.querySelectorAll('.card').forEach(c=>obs.observe(c));
+
+const form=document.getElementById('rsvpForm');
+const msg=document.getElementById('rsvpMessage');
+const btn=document.getElementById('submitRSVP');
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const familyName=document.getElementById('familyName').value.trim();
+  const totalGuests=Number(document.getElementById('totalGuests').value);
+  if(!familyName){msg.textContent='Please enter your family name.';return}
+  if(!Number.isInteger(totalGuests)||totalGuests<1){msg.textContent='Please select total guests.';return}
+  btn.disabled=true;btn.textContent='Confirming…';msg.textContent='';
+  try{
+    if(!RSVP_ENDPOINT){await new Promise(r=>setTimeout(r,500));msg.textContent='Thank you. Your attendance has been noted for this preview.';return}
+    const res=await fetch(RSVP_ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({familyName,totalGuests})});
+    const data=await res.json(); if(!data.ok) throw new Error();
+    msg.textContent='Thank you. We look forward to celebrating with you.';form.reset();
+  }catch{msg.textContent='Could not save your RSVP just now. Please try again.'}
+  finally{btn.disabled=false;btn.textContent='Confirm Attendance →'}
+});
+</script>
+</body>
+</html>
